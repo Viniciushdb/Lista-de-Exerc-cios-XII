@@ -1,0 +1,264 @@
+import java.util.Scanner;
+
+class Bola {
+    private String cor;
+    private double circunferencia;
+    private String material;
+    
+    public Bola(String cor, double circunferencia, String material) {
+        this.cor = cor;
+        this.circunferencia = circunferencia;
+        this.material = material;
+    }
+    
+    public void trocaCor(String novaCor) {
+        this.cor = novaCor;
+    }
+    
+    public String mostraCor() {
+        return this.cor;
+    }
+    
+    public double getCircunferencia() {
+        return circunferencia;
+    }
+    
+    public String getMaterial() {
+        return material;
+    }
+}
+
+class Quadrado {
+    private double lado;
+    
+    public Quadrado(double lado) {
+        this.lado = lado;
+    }
+    
+    public void mudarLado(double novoLado) {
+        this.lado = novoLado;
+    }
+    
+    public double retornarLado() {
+        return this.lado;
+    }
+    
+    public double calcularArea() {
+        return this.lado * this.lado;
+    }
+}
+
+class Retangulo {
+    private double comprimento;
+    private double largura;
+    
+    public Retangulo(double comprimento, double largura) {
+        this.comprimento = comprimento;
+        this.largura = largura;
+    }
+    
+    public void mudarLados(double novoComprimento, double novaLargura) {
+        this.comprimento = novoComprimento;
+        this.largura = novaLargura;
+    }
+    
+    public double retornarComprimento() {
+        return this.comprimento;
+    }
+    
+    public double retornarLargura() {
+        return this.largura;
+    }
+    
+    public double calcularArea() {
+        return this.comprimento * this.largura;
+    }
+    
+    public double calcularPerimetro() {
+        return 2 * (this.comprimento + this.largura);
+    }
+}
+
+class Pessoa {
+    private String nome;
+    private int idade;
+    private double peso;
+    private double altura;
+    
+    public Pessoa(String nome, int idade, double peso, double altura) {
+        this.nome = nome;
+        this.idade = idade;
+        this.peso = peso;
+        this.altura = altura;
+    }
+    
+    public void envelhecer() {
+        this.idade++;
+        if (this.idade < 21) {
+            this.crescer(0.5);
+        }
+    }
+    
+    public void engordar(double quilos) {
+        this.peso += quilos;
+    }
+    
+    public void emagrecer(double quilos) {
+        this.peso -= quilos;
+        if (this.peso < 0) {
+            this.peso = 0;
+        }
+    }
+    
+    public void crescer(double centimetros) {
+        this.altura += centimetros;
+    }
+    
+    public String getNome() {
+        return nome;
+    }
+    
+    public int getIdade() {
+        return idade;
+    }
+    
+    public double getPeso() {
+        return peso;
+    }
+    
+    public double getAltura() {
+        return altura;
+    }
+}
+
+class ContaCorrente {
+    private String numeroConta;
+    private String nomeCorrentista;
+    private double saldo;
+    
+    public ContaCorrente(String numeroConta, String nomeCorrentista) {
+        this.numeroConta = numeroConta;
+        this.nomeCorrentista = nomeCorrentista;
+        this.saldo = 0.0;
+    }
+    
+    public ContaCorrente(String numeroConta, String nomeCorrentista, double saldo) {
+        this.numeroConta = numeroConta;
+        this.nomeCorrentista = nomeCorrentista;
+        this.saldo = saldo;
+    }
+    
+    public void alterarNome(String novoNome) {
+        this.nomeCorrentista = novoNome;
+    }
+    
+    public void deposito(double valor) {
+        if (valor > 0) {
+            this.saldo += valor;
+        }
+    }
+    
+    public boolean saque(double valor) {
+        if (valor > 0 && valor <= this.saldo) {
+            this.saldo -= valor;
+            return true;
+        }
+        return false;
+    }
+    
+    public String getNumeroConta() {
+        return numeroConta;
+    }
+    
+    public String getNomeCorrentista() {
+        return nomeCorrentista;
+    }
+    
+    public double getSaldo() {
+        return saldo;
+    }
+}
+
+public class ExerciciosOO {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("=== DEMONSTRAÇÃO DAS CLASSES ===\n");
+        
+        System.out.println("1. Teste da Classe Bola:");
+        Bola bola = new Bola("Azul", 65.0, "Couro");
+        System.out.println("Cor inicial: " + bola.mostraCor());
+        bola.trocaCor("Vermelha");
+        System.out.println("Nova cor: " + bola.mostraCor());
+        System.out.println();
+        
+        System.out.println("2. Teste da Classe Quadrado:");
+        Quadrado quadrado = new Quadrado(5.0);
+        System.out.println("Lado: " + quadrado.retornarLado());
+        System.out.println("Área: " + quadrado.calcularArea());
+        quadrado.mudarLado(7.0);
+        System.out.println("Novo lado: " + quadrado.retornarLado());
+        System.out.println("Nova área: " + quadrado.calcularArea());
+        System.out.println();
+        
+        System.out.println("3. Cálculo de Pisos e Rodapés:");
+        System.out.print("Informe o comprimento do local (em metros): ");
+        double comprimento = scanner.nextDouble();
+        System.out.print("Informe a largura do local (em metros): ");
+        double largura = scanner.nextDouble();
+        
+        Retangulo local = new Retangulo(comprimento, largura);
+        double area = local.calcularArea();
+        double perimetro = local.calcularPerimetro();
+        
+        System.out.println("Área do local: " + area + " m²");
+        System.out.println("Perímetro do local: " + perimetro + " m");
+        System.out.println("Quantidade de pisos necessários: " + area + " m²");
+        System.out.println("Quantidade de rodapés necessários: " + perimetro + " m");
+        System.out.println();
+        
+        System.out.println("4. Teste da Classe Pessoa:");
+        Pessoa pessoa = new Pessoa("João", 18, 70.0, 170.0);
+        System.out.println("Nome: " + pessoa.getNome());
+        System.out.println("Idade: " + pessoa.getIdade() + " anos");
+        System.out.println("Peso: " + pessoa.getPeso() + " kg");
+        System.out.println("Altura: " + pessoa.getAltura() + " cm");
+        
+        pessoa.envelhecer();
+        System.out.println("Após envelhecer:");
+        System.out.println("Idade: " + pessoa.getIdade() + " anos");
+        System.out.println("Altura: " + pessoa.getAltura() + " cm (cresceu 0.5 cm)");
+        
+        pessoa.engordar(2.5);
+        System.out.println("Após engordar 2.5 kg: " + pessoa.getPeso() + " kg");
+        
+        pessoa.emagrecer(1.0);
+        System.out.println("Após emagrecer 1 kg: " + pessoa.getPeso() + " kg");
+        System.out.println();
+        
+        System.out.println("5. Teste da Classe ContaCorrente:");
+        ContaCorrente conta1 = new ContaCorrente("12345-6", "Maria Silva");
+        ContaCorrente conta2 = new ContaCorrente("78901-2", "Pedro Santos", 1000.0);
+        
+        System.out.println("Conta 1 - Número: " + conta1.getNumeroConta());
+        System.out.println("Conta 1 - Nome: " + conta1.getNomeCorrentista());
+        System.out.println("Conta 1 - Saldo: R$ " + conta1.getSaldo());
+        
+        conta1.deposito(500.0);
+        System.out.println("Após depósito de R$ 500,00: R$ " + conta1.getSaldo());
+        
+        boolean saqueRealizado = conta1.saque(200.0);
+        if (saqueRealizado) {
+            System.out.println("Saque de R$ 200,00 realizado. Saldo atual: R$ " + conta1.getSaldo());
+        } else {
+            System.out.println("Saque não realizado - saldo insuficiente.");
+        }
+        
+        conta1.alterarNome("Maria Silva Santos");
+        System.out.println("Nome alterado para: " + conta1.getNomeCorrentista());
+        
+        System.out.println("\nConta 2 - Saldo inicial: R$ " + conta2.getSaldo());
+        
+        scanner.close();
+    }
+}
